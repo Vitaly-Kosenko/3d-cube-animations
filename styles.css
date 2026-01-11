@@ -1,0 +1,466 @@
+/*3D куб анмації початок*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #4CAF50;
+    /* Зовнішній фон (зелений як приклад) */
+    font-family: Arial, sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.frame {
+    width: 400px;
+    height: 400px;
+    perspective: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.frame-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+    /* 50% ширини екрана */
+    height: 80vh;
+    /* 50% висоти екрана */
+    background: #929693;
+    /* Білий фон */
+    border: 20px solid #000000;
+    /* Колір рамки */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    /* Тінь для рамки */
+    border-radius: 20px;
+    /* Закруглення кутів */
+}
+
+.cube {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+
+.cube div {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: #222;
+    border: 2px solid #fff;
+    opacity: 0.9;
+}
+
+.auto-rotate {
+    animation: rotateCube 6s infinite linear;
+}
+
+@keyframes rotateCube {
+    0% {
+        transform: rotateX(-30deg) rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateX(-30deg) rotateY(360deg);
+    }
+}
+
+
+.front {
+    transform: translateZ(150px);
+    background: linear-gradient(#151515, #00c000);
+}
+
+.back {
+    transform: rotateY(180deg) translateZ(150px);
+    background: linear-gradient(#151515, #ff0000);
+}
+
+.left {
+    transform: rotateY(-90deg) translateZ(150px);
+    background: linear-gradient(#151515, #0000ff);
+}
+
+.right {
+    transform: rotateY(90deg) translateZ(150px);
+    background: linear-gradient(#151515, #ffff00);
+}
+
+.top {
+    transform: rotateX(90deg) translateZ(150px);
+    background: linear-gradient(#151515, #00ffff);
+}
+
+.bottom {
+    transform: rotateX(-90deg) translateZ(150px);
+    background: linear-gradient(#151515, #ff00ff);
+}
+
+/*3D куб анімації кінець*/
+
+/*Кнопки Старт та Стоп початок*/
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    position: relative;
+    background-color: #d1edd8;
+    /* Колір фону панелі */
+    padding: 10px 20px;
+    /* Відступи з боків і зверху/знизу */
+    display: flex;
+    /* Використовуємо flexbox для розміщення кнопок */
+    justify-content: center;
+    /* Центруємо кнопки по горизонталі */
+    align-items: center;
+    /* Центруємо кнопки по вертикалі */
+    border-radius: 8px;
+    /* Закруглені кути навігаційної панелі */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Легка тінь навколо панелі */
+}
+
+button {
+    background-color: #000000;
+    /* Колір фону */
+    color: #fff;
+    /* Колір тексту */
+    border: none;
+    /* Приховати обведення */
+    border-radius: 5px;
+    /* Закруглені кути */
+    padding: 10px 20px;
+    /* Внутрішні відступи */
+    font-size: 16px;
+    /* Розмір тексту */
+    font-weight: bold;
+    /* Жирний шрифт */
+    font-family: Arial, sans-serif;
+    /* Шрифт */
+    cursor: pointer;
+    /* Зміна курсора на "руку" */
+    margin: 0 10px;
+    /* Відступи між кнопками */
+}
+
+button:hover {
+    background-color: #999999;
+    /* Темніший фон при наведенні */
+    color: #e6e6e6;
+    /* Світліший текст */
+    transform: scale(1.05);
+    /* Легке збільшення */
+    transition: 0.3s ease;
+    /* Плавний перехід */
+}
+
+button {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Зовнішня тінь */
+}
+
+button:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    /* Посилена тінь при наведенні */
+}
+
+button {
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #333333;
+    /* Зміна кольору */
+    letter-spacing: 1px;
+    /* Збільшення міжбуквеного простору */
+}
+
+button:active {
+    background-color: #222222;
+    /* Ще темніший фон при натисканні */
+    transform: scale(0.95);
+    /* Зменшення кнопки */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Втиснення */
+}
+
+/*Кнопки Старт та Стоп кінець*/
+
+
+.volume-indicator-wrapper {
+    width: 26.9%;
+    height: 20px;
+    padding: 2px;
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px #00ff00;
+    overflow: hidden;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+}
+
+#volume-indicator {
+    height: 100%;
+    width: 10px;
+    background: linear-gradient(to right, #00ff00, #007700);
+    border-radius: 8px;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 5px #00ff00;
+}
+
+
+
+#equalizer {
+    position: fixed;
+    bottom: 50px;
+    left: 150px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4px;
+    height: 100px;
+    align-items: flex-end;
+    z-index: 100;
+    transition: box-shadow 0.2s ease;
+
+    /*Додаємо рамку */
+    height: 155px;
+    border: 2px solid #00ff00;
+    /* зелена рамка */
+    border-radius: 8px;
+    /* заокруглені кути */
+    padding: 5px;
+    /* невеликий відступ всередині рамки */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* легка затемнення під барчиками */
+}
+
+.equalizer-bar {
+    width: 6px;
+    height: 10px;
+    background: linear-gradient(to top, #00ff00, #007700);
+    border-radius: 3px;
+    box-shadow: 0 0 5px #00ff00;
+    transition: height 0.1s ease-out;
+    height: 10px;
+}
+
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* Індикатор — абсолютно з правого краю */
+.secret-marquee-wrapper {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.side-panel {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid #00ff00;
+    border-radius: 10px 0 0 10px;
+    box-shadow: 0 0 10px #00ff00;
+    width: 300px;
+    overflow: hidden;
+    transition: width 0.4s ease;
+    z-index: 10;
+}
+
+.side-panel.closed {
+    width: 60px;
+}
+
+.side-toggle {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    cursor: pointer;
+    color: #00ff00;
+    user-select: none;
+}
+
+.side-content {
+    max-height: 700px;
+    opacity: 1;
+     padding: 10px;
+     overflow: hidden;
+    transition:
+    max-height 0.4s ease,
+    opacity 0.4s ease,
+    padding 0.3s ease;
+    color: #ffffff;
+}
+
+.side-panel.closed .side-content {
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#arrow-icon:hover {
+    color: #66ff66;
+    /* світліше при наведенні */
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+}
+
+.side-content ul {
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.side-content li {
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.language-switcher {
+    position: absolute;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+}
+
+.side-content h4 {
+    font-size: 16px;
+    color: #00ff00;
+    margin-top: 12px;
+    border-bottom: 1px solid #00ff00;
+    padding-bottom: 3px;
+}
+
+.side-content {
+    overflow-y: auto;
+    max-height: 80vh;
+    scrollbar-width: thin;
+    scrollbar-color: #66ff66 transparent;
+}
+
+.side-content h4 {
+    position: relative;
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+}
+
+.side-content h4::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0%;
+    background: lime;
+    transition: width 0.3s ease;
+}
+
+.side-content h4:hover::after {
+    width: 100%;
+}
+
+
+.panel-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ccffcc;
+    margin-bottom: 4px;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.panel-intro {
+    font-size: 14px;
+    color: #e0ffe0;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.panel-title {
+    border-left: 4px solid lime;
+    padding-left: 8px;
+    background: linear-gradient(to right, rgba(0, 255, 0, 0.1), transparent);
+}
+
+.side-content p,
+.side-content li {
+    line-height: 1.5;
+}
+
+.panel-intro {
+    opacity: 0;
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 500px) {
+    .panel-title {
+        font-size: 16px;
+    }
+
+    .panel-intro {
+        font-size: 12px;
+    }
+}
+
+.panel-title {
+    opacity: 0;
+    transform: translateY(-5px);
+    animation: fadeInTop 0.6s ease forwards;
+}
+
+/* Анімація */
+@keyframes fadeInTop {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in.delay-1 {
+    animation-delay: 0.3s;
+}
+
+.fade-in.delay-2 {
+    animation-delay: 0.6s;
+}
+
+.fade-in.delay-3 {
+    animation-delay: 0.9s;
+}

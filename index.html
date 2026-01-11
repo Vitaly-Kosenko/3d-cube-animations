@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Cube Animation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="img/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="img/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="manifest" href="img/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="img/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S9QQSQG8F1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-S9QQSQG8F1');
+    </script>
+
+</head>
+
+<body>
+    <div class="three-container">
+        <div class="wrapper">
+            <div class="frame-wrapper">
+                <div class="frame">
+                    <div class="cube">
+                        <div class="front"></div>
+                        <div class="back"></div>
+                        <div class="left"></div>
+                        <div class="right"></div>
+                        <div class="top"></div>
+                        <div class="bottom"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Рамка з кнопкою + опис -->
+        <div class="side-panel closed">
+            <div class="side-toggle" onclick="toggleDescription()">
+                <span id="arrow-icon">&#10148;</span>
+            </div>
+            <div class="side-content" id="cube-description" data-i18n-html="cubePanel">
+                <h3 class="panel-title">🧊 Інформація про куба</h3>
+                <p class="panel-intro"><strong>3D-куб</strong> — це інтерактивний візуальний елемент, який реагує на
+                    музику в реальному
+                    часі.</p>
+
+                <h4 class="panel-title">🌀 Поведінка</h4>
+                <ul class="panel-intro">
+                    <li>У спокійному режимі — автоматичне обертання (CSS).</li>
+                    <li>У режимі прослуховування — реагує на гучність аудіо.</li>
+                    <li>Обертання залежить від амплітуди: чим гучніше — тим швидше.</li>
+                </ul>
+
+                <h4 class="panel-title">🟩 Візуальні ефекти</h4>
+                <ul class="panel-intro">
+                    <li>Куб має 3D-глибину та напівпрозорі межі з підсвічуванням.</li>
+                </ul>
+
+                <h4 class="panel-title">🔓 Секретний режим</h4>
+                <ul class="panel-intro">
+                    <li>5 натискань на "Старт" відкривають прихований режим.</li>
+                    <li>Він активує нову анімацію та змінює логіку обертання.</li>
+                </ul>
+
+                <h4 class="panel-title">🔁 Синхронізація</h4>
+                <ul class="panel-intro">
+                    <li>Куб обертається разом із еквалайзером та смужкою гучності.</li>
+                    <li>Створює цілісне музично-візуальне враження.</li>
+                </ul>
+
+            </div>
+        </div>
+
+
+        <div class="volume-indicator-wrapper">
+            <div id="volume-indicator"></div>
+        </div>
+
+
+        <div id="equalizer"></div>
+        <div id="volume-bar"></div>
+
+
+        <div class="controls">
+
+            <div class="language-switcher">
+                <button class="ui-button" data-lang="uk">UA</button>
+                <button class="ui-button" data-lang="ru">RU</button>
+                <button class="ui-button" data-lang="en">EN</button>
+            </div>
+
+
+            <div class="controls-row">
+                <div class="button-group">
+                    <button id="startButton" class="ui-button" data-i18n="start"></button>
+                    <button id="stopButton" class="ui-button" data-i18n="stop"></button>
+                </div>
+            </div>
+
+            <!-- 🔐 Секретний індикатор окремо від кнопок -->
+            <div class="secret-marquee-wrapper">
+                <p id="secret-status" data-i18n="secretStatus"></p>
+
+            </div>
+        </div>
+
+
+
+        <audio id="audio">
+            <source src="./audio/music.mp3" type="audio">
+            <source src="./audio/music.mp3" type="audio/mpeg">
+            <source src="./audio/music.ogg" type="audio/ogg">
+        </audio>
+
+    </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="index.js"></script>
+
+</body>
+
+</html>
